@@ -1,2 +1,2 @@
 # CultureConnect
-UniHack =)
+CultureConnect este o platformă online interactivă care îți oferă o călătorie digitală prin culturile lumii. Utilizatorii pot descoperi povești tradiționale, muzică locală, artă, gastronomie și obiceiuri din zeci de țări. Site-ul este structurat pe hărți, recomandări zilnice și conținut multimedia, pentru o experiență captivantă și educativă. Ideal pentru curioși, elevi, profesori sau pasionați de diversitate culturală.
