@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login - CultureConnect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .auth-center {
+            max-width: 480px;
+            margin: 96px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .tabs button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            background: #f5f6f8;
+            cursor: pointer;
+        }
+        
+        .tabs button.active {
+            background: #8B5FFF;
+            color: #fff;
+            border: none;
+        }
+        
+        form {
+            display: none;
+        }
+        
+        form.active {
+            display: block;
+        }
+        
+        .field {
+            margin-bottom: 10px;
+        }
+        
+        .field input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        
+        .small {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .status {
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        .status.info {
+            background: #fff3cd;
+            color: #856404;
+            display: block;
+        }
+        
+        .verify-code {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .verify-code input {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>CultureConnect</h1>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="auth-center" id="auth-center">
+            <div class="tabs">
+                <button id="tab-login" class="active">Login</button>
+                <button id="tab-register">Register</button>
+            </div>
+
+            <form id="form-login" class="active">
+                <div class="field"><input id="login-email" type="email" placeholder="Email" required></div>
+                <div class="field"><input id="login-password" type="password" placeholder="Password" required></div>
+                <button id="btn-login" type="button">Login</button>
+                <div class="small">Don't have an account? Register to earn points.</div>
+                <div id="login-status" class="status"></div>
+            </form>
+
+            <form id="form-register">
+                <div class="field"><input id="reg-name" type="text" placeholder="Display name" required></div>
+                <div class="field"><input id="reg-email" type="email" placeholder="Email" required></div>
+                <div class="field"><input id="reg-password" type="password" placeholder="Password (min 6)" required></div>
+                <div class="field"><input id="reg-password2" type="password" placeholder="Confirm password" required></div>
+                <button id="btn-register" type="button">Register</button>
+                <div id="reg-status" class="status"></div>
+            </form>
+
+            <div id="verify-panel" style="margin-top:12px; display:none;">
+                <div class="small">Enter verification code (we simulated sending one for local mode).</div>
+                <div class="verify-code">
+                    <input id="verify-code-input" placeholder="6-digit code">
+                    <button id="btn-verify" type="button">Verify</button>
+                </div>
+                <div id="verify-status" class="status info"></div>
+                <div style="margin-top:8px;">
+                    <button id="btn-resend" type="button">Resend code</button>
+                </div>
+            </div>
+
+            <div id="signed-in-panel" style="display:none; margin-top:12px;">
+                <p>Signed in as <strong id="signed-in-name"></strong></p>
+                <button id="btn-logout" type="button">Logout</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.CCAuth) window.CCAuth.init();
+        });
+    </script>
+</body>
+
+</html>

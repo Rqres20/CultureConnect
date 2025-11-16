@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - CultureConnect</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>CultureConnect</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                <li><a href="map.html" class="nav-link">Map</a></li>
+                <li><a href="rewards.html" class="nav-link">Rewards</a></li>
+                <li><a href="login.html" class="nav-link" id="nav-auth-link">Login</a></li>
+                <li class="nav-user-li"><span id="current-user" class="nav-user"></span></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you — questions, feedback, or ideas.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <div class="container">
+                <div class="form-container" style="max-width:700px;margin:40px auto;">
+                    <form id="contact-form">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+
+                        <button type="submit" class="cta-button">Send Message</button>
+                        <div id="contact-status" style="margin-top:12px;color:green;display:none;"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CultureConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // For demo: simply show a success message and log to console
+            document.getElementById('contact-status').style.display = 'block';
+            document.getElementById('contact-status').textContent = 'Thanks, ' + (name || 'there') + '! Your message has been received.';
+            console.log('Contact form submitted:', { name, email, message });
+
+            // Clear form after a short delay
+            setTimeout(() => {
+                document.getElementById('contact-form').reset();
+            }, 800);
+        });
+    </script>
+</body>
+</html>

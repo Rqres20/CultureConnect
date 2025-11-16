@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map - CultureConnect</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* Map page specific: map window inside the page */
+        html, body { height: 100%; margin: 0; }
+        /* Default map box — exact height set by JS to fill available viewport under navbar */
+        #map { width: 100%; height: 70vh; border-radius: 0; box-shadow: none; margin-top: 0; position: relative; z-index: 0; }
+        /* Keep nav above the map */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 105; }
+        .map-legend { position: fixed; left: 16px; bottom: 16px; background: rgba(255,255,255,0.95); padding:8px 10px; border-radius:6px; font-size:0.95rem; box-shadow:0 6px 18px rgba(0,0,0,0.08); z-index:104; }
+        .container { padding: 0 20px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><h1>CultureConnect</h1></div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="map.html" class="nav-link active">Map</a></li>
+                <li><a href="rewards.html" class="nav-link">Rewards</a></li>
+                <li><a href="login.html" class="nav-link" id="nav-auth-link">Login</a></li>
+                <li class="nav-user-li"><span id="current-user" class="nav-user"></span></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <header class="page-hero">
+        <div class="container">
+            <h1>World Map</h1>
+            <p>Click any country to see its name.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container map-window" style="padding:0;">
+            <div id="map"></div>
+            <div class="map-legend">Tip: zoom and click a country to see its name.</div>
+            
+            <!-- Upload overlay removed: uploads are handled on Rewards page -->
+        </div>
+        <div class="container" style="padding:18px 20px 40px;">
+            <h2 style="margin:0 0 8px;">Search by city or attraction</h2>
+            <div class="city-search">
+                <input id="city-input" type="text" placeholder="Type a city or attraction name" />
+                <button id="city-search-btn" class="cta-button">Search</button>
+            </div>
+            <div id="suggestions-box" class="suggestions-box" style="display:none;"></div>
+            <div id="city-results" style="margin-top:12px;">
+                <!-- City info and attractions will be injected here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container"><p>&copy; 2025 CultureConnect.</p></div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/city.js"></script>
+</body>
+</html>

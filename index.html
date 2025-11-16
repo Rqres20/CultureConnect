@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CultureConnect - Bridging Cultures Together</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>CultureConnect</h1>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a class="nav-link active" href="index.html">Home</a></li>
+                <li><a class="nav-link" href="map.html">Map</a></li>
+                <li><a class="nav-link" href="rewards.html">Rewards</a></li>
+                <li><a class="nav-link" href="about.html">About</a></li>
+            </ul>
+
+            <div style="margin-left:auto; display:flex; align-items:center; gap:12px;">
+                <span id="current-user"></span>
+                <a id="nav-auth-link" href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to CultureConnect</h1>
+            <p>Bridging Cultures, Building Communities, Celebrating Diversity</p>
+            <button class="cta-button">Explore Our Journey</button>
+        </div>
+        <div class="hero-overlay"></div>
+    </header>
+
+    <main>
+        <section class="features">
+            <div class="container">
+                <h2>What We Do</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Global Community</h3>
+                        <p>Connect with people from diverse cultural backgrounds around the world and expand your horizons.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Cultural Education</h3>
+                        <p>Learn about different cultures, traditions, and ways of life through engaging content and experiences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3>Community Engagement</h3>
+                        <p>Participate in events, discussions, and activities that bring cultures together in meaningful ways.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Join Our Global Community Today</h2>
+                <p>Be part of a movement that celebrates and connects cultures from around the world</p>
+                <button class="cta-button-secondary">Get Started</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CultureConnect. All rights reserved. Connecting cultures, one community at a time.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.CCAuth && typeof window.CCAuth.init === 'function') window.CCAuth.init();
+        });
+    </script>
+    <script src="js/script.js"></script>
+
+    <!-- Custom home page tweaks:
+         - hide social icons (Instagram / Twitter / Facebook) and any generic "bottom" button if present
+         - make "Explore our journey" go to about.html
+         - make "Get started" (down) go to rewards.html
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Helper: hide any element matching selectors
+            const hideSelectors = [
+                '.social-links', // container used in many templates
+                '.social-icons',
+                'a[href*="instagram"]',
+                'a[href*="twitter"]',
+                'a[href*="facebook"]',
+                '#bottom-button',
+                '.bottom-button',
+                '.botton', // typo variants
+            ];
+            hideSelectors.forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => el.style.display = 'none');
+            });
+
+            // Helper: find clickable element by its visible text (buttons or anchors)
+            function findClickableByText(text) {
+                const norm = t => (t || '').trim().toLowerCase();
+                const nodes = Array.from(document.querySelectorAll('a,button,input[type="button"],input[type="submit"],.btn'));
+                return nodes.find(n => {
+                    if (n.tagName === 'INPUT') return norm(n.value) === norm(text);
+                    return norm(n.textContent) === norm(text);
+                }) || null;
+            }
+
+            // Wire "Explore our journey" -> about.html
+            const exploreBtn = findClickableByText('Explore our journey') || findClickableByText('Explore our Journey');
+            if (exploreBtn) {
+                exploreBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'about.html';
+                }, {
+                    passive: true
+                });
+                // if it's an <a>, also ensure href
+                if (exploreBtn.tagName.toLowerCase() === 'a') exploreBtn.href = 'about.html';
+            }
+
+            // Wire "Get started" (down button) -> rewards.html
+            const getStarted = findClickableByText('Get started') || findClickableByText('Get Started');
+            if (getStarted) {
+                getStarted.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'rewards.html';
+                }, {
+                    passive: true
+                });
+                if (getStarted.tagName.toLowerCase() === 'a') getStarted.href = 'rewards.html';
+            }
+
+            // If your "down" control is an element with aria-label or custom class, also try some common ones:
+            const fallbackDown = document.querySelector('.scroll-down, .down-button, .hero-down, .hero-cta');
+            if (!getStarted && fallbackDown) {
+                fallbackDown.style.cursor = 'pointer';
+                fallbackDown.addEventListener('click', () => {
+                    window.location.href = 'rewards.html';
+                }, {
+                    passive: true
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
